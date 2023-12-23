@@ -1,0 +1,41 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+
+/* Property card styles */
+.property-card {
+    background-color: #f6f9fc; /* Theme background color */
+    border: 1px solid #dee2e6; /* Optional border */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Optional shadow */
+}
+
+    .property-card h2 {
+        color: #5369f8; /* Theme primary color */
+    }
+
+    .property-card .btn-primary {
+        background-color: #5369f8;
+        border-color: #5369f8;
+        color: #fff;
+    }
+
+    /* Additional customizations (optional) */
+    .property-card:hover {
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15); /* Hover effect */
+    }
