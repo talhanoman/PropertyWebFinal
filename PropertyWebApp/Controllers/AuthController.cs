@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using PropertyWebApp.Data;
 using PropertyWebApp.Models;
+using BCryptNet = BCrypt.Net.BCrypt;
 
 namespace PropertyWebApp.Controllers
 {
@@ -40,12 +41,12 @@ namespace PropertyWebApp.Controllers
                 // Check if the email is unique
                 if (await IsEmailUnique(model.Email))
                 {
+                    string hashedPassword = BCryptNet.HashPassword(model.Password);
                     // Create a new user
                     var newUser = new User
                     {
                         Email = model.Email,
-                        Password = model.Password // Note: You should hash and salt the password for security
-                        // Other properties like CreatedAt will be set automatically
+                        Password = hashedPassword                         
                     };
 
                     // Add user to the database
@@ -53,7 +54,7 @@ namespace PropertyWebApp.Controllers
                     await _context.SaveChangesAsync();
 
                     // Redirect to login or some other page
-                    return RedirectToAction("Login", "Home");
+                    return RedirectToAction("Index", "Home");
                 }
                 else
                 {
@@ -69,6 +70,35 @@ namespace PropertyWebApp.Controllers
         private async Task<bool> IsEmailUnique(string email)
         {
             return await _context.Users.AllAsync(u => u.Email != email);
+        }
+
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Login(User model)
+        {
+            if (ModelState.IsValid)
+            {
+                // Retrieve the user by email
+                var user = _context.Users.SingleOrDefault(u => u.Email == model.Email);
+
+                if (user != null && BCryptNet.Verify(model.Password, user.Password))
+                {
+                    // You can implement your authentication logic here (e.g., setting a cookie or a session variable)
+                    HttpContext.Session.SetInt32("UserId", user.Id);
+                    // For simplicity, let's assume a successful login redirects to the home page
+                    return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    // Invalid email or password
+                    ModelState.AddModelError(string.Empty, "Invalid email or password");
+                }
+            }
+
+            // If we reach here, something failed, return to the login page with errors
+            return View(model);
         }
     }
 }
