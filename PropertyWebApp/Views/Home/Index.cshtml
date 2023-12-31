@@ -1,65 +1,30 @@
-﻿@{
+﻿@model List<PropertyWebApp.Models.Property>
+
+@{
     ViewData["Title"] = "Home Page";
 }
+
+
+<section class="py-3">
+    <h1 class="text-center text-theme">Properties For Sale</h1>
+</section>
 <section class="row">
-    <div class="flex flex-column justify-content-center h-100 col-md-4 col-lg-3 ">
-        <div class="card property-card mb-4">
-            <img class="card-img-top" src="https://lid.zoocdn.com/645/430/03de679e479a3c1915a24b3ac6c65c41675b6bd6.jpg" alt="Property Image">
-            <div class="card-body">
-                <h2 class="card-title text-theme">Property Title</h2>
-                <p class="card-text">Property description with key features...</p>
-                <p class="card-text">
-                    <span class="text-theme">Price: $450,000</span> |
-                    <span class="text-theme">Bedrooms: 3</span> |
-                    <span class="text-theme">Bathrooms: 2</span>
-                </p>
-                <button class="btn btn-primary btn-theme">View Details</button>
+    @foreach (var property in Model)
+    {
+        <div class="flex flex-column justify-content-center h-100 col-md-4 col-lg-3">
+            <div class="card property-card mb-4">
+                <img class="card-img-top" src="https://lid.zoocdn.com/645/430/03de679e479a3c1915a24b3ac6c65c41675b6bd6.jpg" alt="Property Image">
+                <div class="card-body">
+                    <h2 class="card-title text-theme">@property.Address</h2>
+                    <p class="card-text">@property.Description</p>
+                    <p class="card-text">
+                        <span class="text-theme">Price: $@property.Price</span> |
+                        <span class="text-theme">Bedrooms: @property.Bedrooms</span> |
+                        <span class="text-theme">Square Footage: @property.SquareFootage</span>
+                    </p>
+                    <a asp-action="PropertyDetails" asp-controller="Home" asp-route-id="@property.Id" class="btn btn-primary btn-theme">View Details</a>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="flex flex-column justify-content-center h-100 col-md-4 col-lg-3 ">
-        <div class="card property-card mb-4">
-            <img class="card-img-top" src="https://lid.zoocdn.com/645/430/03de679e479a3c1915a24b3ac6c65c41675b6bd6.jpg" alt="Property Image">
-            <div class="card-body">
-                <h2 class="card-title text-theme">Property Title</h2>
-                <p class="card-text">Property description with key features...</p>
-                <p class="card-text">
-                    <span class="text-theme">Price: $450,000</span> |
-                    <span class="text-theme">Bedrooms: 3</span> |
-                    <span class="text-theme">Bathrooms: 2</span>
-                </p>
-                <button class="btn btn-primary btn-theme">View Details</button>
-            </div>
-        </div>
-    </div>
-    <div class="flex flex-column justify-content-center h-100 col-md-4 col-lg-3 ">
-        <div class="card property-card mb-4">
-            <img class="card-img-top" src="https://lid.zoocdn.com/645/430/03de679e479a3c1915a24b3ac6c65c41675b6bd6.jpg" alt="Property Image">
-            <div class="card-body">
-                <h2 class="card-title text-theme">Property Title</h2>
-                <p class="card-text">Property description with key features...</p>
-                <p class="card-text">
-                    <span class="text-theme">Price: $450,000</span> |
-                    <span class="text-theme">Bedrooms: 3</span> |
-                    <span class="text-theme">Bathrooms: 2</span>
-                </p>
-                <button class="btn btn-primary btn-theme">View Details</button>
-            </div>
-        </div>
-    </div>
-    <div class="flex flex-column justify-content-center h-100 col-md-4 col-lg-3 ">
-        <div class="card property-card mb-4">
-            <img class="card-img-top" src="https://lid.zoocdn.com/645/430/03de679e479a3c1915a24b3ac6c65c41675b6bd6.jpg" alt="Property Image">
-            <div class="card-body">
-                <h2 class="card-title text-theme">Property Title</h2>
-                <p class="card-text">Property description with key features...</p>
-                <p class="card-text">
-                    <span class="text-theme">Price: $450,000</span> |
-                    <span class="text-theme">Bedrooms: 3</span> |
-                    <span class="text-theme">Bathrooms: 2</span>
-                </p>
-                <button class="btn btn-primary btn-theme">View Details</button>
-            </div>
-        </div>
-    </div>
+    }
 </section>

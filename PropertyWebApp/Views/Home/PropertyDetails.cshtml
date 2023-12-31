@@ -1,0 +1,29 @@
+﻿@model PropertyWebApp.Models.Property
+
+@{
+    ViewData["Title"] = "Property Details";
+}
+
+<section class="py-3">
+    <h1 class="text-center text-theme">Property Details</h1>
+</section>
+
+<div class="row">
+    <div class="col-md-8 offset-md-2">
+        <div class="card property-card mb-4">
+            <img class="card-img-top" src="https://lid.zoocdn.com/645/430/03de679e479a3c1915a24b3ac6c65c41675b6bd6.jpg" alt="Property Image">
+            <div class="card-body">
+                <h2 class="card-title text-theme">@Model.Address</h2>
+                <p class="card-text">@Model.Description</p>
+                <p class="card-text">
+                    <span class="text-theme">Price: $@Model.Price</span> |
+                    <span class="text-theme">Bedrooms: @Model.Bedrooms</span> |
+                    <span class="text-theme">Square Footage: @Model.SquareFootage</span>
+                </p>
+                <!-- Add more details here as needed -->
+                <!-- Add a button to navigate back to the list of properties -->
+                <a asp-action="Index" asp-controller="Home" class="btn btn-secondary btn-theme">Back to Properties</a>
+            </div>
+        </div>
+    </div>
+</div>

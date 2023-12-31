@@ -39,4 +39,10 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Auth}/{action=Login}/{id?}");
 
+app.MapControllerRoute(
+    name: "propertyDetails",
+    pattern: "Properties/Details/{id?}",
+    defaults: new { controller = "Home", action = "PropertyDetails" }
+);
+
 app.Run();

@@ -7,6 +7,7 @@ namespace PropertyWebApp.Models
     {
         [Key]
         public int Id { get; set; }
+        public string Title { get; set; }
         public int OwnerId { get; set; }
         [Required]
         public string Address { get; set; }
