@@ -20,8 +20,13 @@
                     <span class="text-theme">Bedrooms: @Model.Bedrooms</span> |
                     <span class="text-theme">Square Footage: @Model.SquareFootage</span>
                 </p>
-                <!-- Add more details here as needed -->
-                <!-- Add a button to navigate back to the list of properties -->
+                <form asp-action="Delete" asp-controller="Property" method="post">
+                    <input type="hidden" name="id" value="@Model.Id" />
+                    <button type="submit" class="btn btn-danger btn-theme">Delete</button>
+                </form>
+
+                <a asp-action="Edit" asp-controller="Property" asp-route-id="@Model.Id" class="btn btn-primary btn-theme">Edit</a>
+
                 <a asp-action="Index" asp-controller="Home" class="btn btn-secondary btn-theme">Back to Properties</a>
             </div>
         </div>

@@ -18,7 +18,7 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
+                    <ul class="navbar-nav flex-grow-1 align-items-center">
                         <li class="nav-item">
                             <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
@@ -27,6 +27,20 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="About">About</a>
+                        </li>
+                        <li class="nav-item dropdown ms-auto dropstart">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <img width="50" height="50" class="rounded-circle" src="https://approachableai.com/wp-content/uploads/2022/12/SDv2.1-Example.jpg" />
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu" aria-labelledby="navbarDarkDropdownMenuLink">
+                                @{
+                                    // Check if ViewContext.HttpContext is not null before accessing Session
+                                    int? userId = ViewContext.HttpContext?.Session?.GetInt32("UserId");
+                                }
+                                <li><a class="dropdown-item text-theme" asp-controller="UserProfile" asp-action="Index" asp-route-userId="@userId">User Profile</a></li>
+                                <li><a class="dropdown-item text-theme" href="#">My Favourites</a></li>
+                                <li><a class="dropdown-item text-theme" href="#">Logout</a></li>
+                            </ul>
                         </li>
                     </ul>
                 </div>
